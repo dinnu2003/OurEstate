@@ -1,0 +1,100 @@
+@use "../../Responsive.scss" as *;
+nav{
+    display: flex;
+    height: 100px;
+    justify-content: space-between;
+    align-items: center;
+    a{
+        transition: all 0.4s ease;
+        &:hover{
+            scale: 1.02;
+
+        }
+        @include sm{
+            display: none;
+        }
+    }
+    .left{
+        flex:3;
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        .logo{
+            font-weight: bold;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            img{
+                width: 28px;
+                height: 30px;
+            }
+            span{
+                @include md{
+                    display: none;
+                }
+                @include sm{
+                    display: initial;
+                }
+            }
+        }
+    }
+    .right{
+        flex:2;
+        display: flex;
+        justify-content: flex-end;
+        gap: 20px;
+        align-items: center;
+        background-color: #fcf5f3;
+        height: 100%;
+        @include sm {
+            background-color: transparent;
+        }
+        a{
+            padding: 7px 16px;
+            margin: 14px;
+            border-radius: 4px;
+        }
+        .register{
+            background-color: #fece51;
+        }
+        .menuIcon{
+            display: none;
+            @include sm{
+                display: inline;
+            }
+            cursor: pointer;
+            z-index: 999;
+            color: white;
+            background-color: black;
+        }
+        .menu{
+            position: absolute;
+            background-color: black;
+            color: white;
+            top: 0;
+            right: -70%;
+            width: 70%;
+            height: 100vh;
+            transition: all 1s ease;
+            &.active{
+                right: 0;
+            }
+            @include sm{
+                a{
+                    display: initial;
+
+                }
+                .register{
+                    background-color: black;
+                }
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap:10px;
+            }
+        }
+    }
+
+}

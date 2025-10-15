@@ -1,0 +1,69 @@
+@use "../../Responsive.scss" as *;
+.home{
+
+    display: flex;
+    height: 100%;
+    .text-container{
+        flex: 3;
+        
+        
+        .wrapper{
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            
+            
+            padding-right: 60px;
+            gap: 50px;
+            @include sm{
+                width: 100%;
+                padding-right: 0px;
+            }
+            .title{
+                font-size: 48px;
+                color: rgb(121, 115, 115);
+                @include sm{
+                    font-size: 24px;
+                }
+            }
+            .boxes{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                h1{
+                    font-size: 36px;
+
+                }
+                h3{
+                    font-size: 20px;
+                    font-weight: 300;
+                }
+                @include sm{
+                    h1{
+                        font-size: 24px;
+                    }
+                    h3{
+                        font-size: 10px;
+                    }
+                }
+
+            }
+        }
+        
+    }
+    .image-container{
+        flex: 2;
+        position: relative;
+        @include md{
+            display: none;
+        }
+        background-color: #fcf5f3;
+        img{
+            position: absolute;
+            right: 0;
+            width: 115%;
+        }
+    }
+}
