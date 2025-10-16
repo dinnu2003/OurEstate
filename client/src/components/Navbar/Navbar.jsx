@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "./Navbar.scss"
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 function Navbar() {
@@ -21,7 +22,7 @@ function Navbar() {
         <a href="/login" className="login">Sign in</a>
         <a href="/register" className="register">Sign up</a>
         <div onClick={()=>setOpen(!open)} className="menuIcon">
-          ME
+          <MenuIcon/>
         </div>
         <div className={open?"menu active" :"menu"}>
           <a href="/">Home</a>

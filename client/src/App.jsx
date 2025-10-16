@@ -1,23 +1,38 @@
 import { useState } from 'react'
 
-import './App.scss'
-import Navbar from './components/Navbar/Navbar'
-import Home from './pages/HomePage/Home'
+
+import Layout from './Layout/Layout'
+import List from "./pages/ListPage/List"
+import Home from "./pages/HomePage/Home"
+import Product from "./pages/ProductPage/Product"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 function App() {
-  
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />
+        },
+        {
+          path:"/list",
+          element:<List/>
+        },
+        {
+          path:"/:id",
+          element:<Product/>
+        }
+      ]
+
+    }
+  ])
 
   return (
-    
-    <div className="layout">
-     <div className="navbar">
-      <Navbar/>
-     </div>
-     <div className="content">
-      <Home/>
-     </div>
-    </div>
-    
+
+    <RouterProvider router={router} />
   )
 }
 

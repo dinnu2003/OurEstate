@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "./SearchBar.scss"
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 function SearchBar() {
     const [query,setQuery]=useState({
         type:"Buy",
@@ -35,7 +36,7 @@ function SearchBar() {
         max={10000000}
         placeholder='Max Price'/>
         <button>
-            S
+            <SearchRoundedIcon/>
 
         </button>
       </form>
