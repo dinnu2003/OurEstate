@@ -1,68 +1,117 @@
 @use "../../Responsive.scss" as *;
-nav{
+
+nav {
     display: flex;
     height: 100px;
     justify-content: space-between;
     align-items: center;
-    a{
+    
+    @include md{
+        margin: 0px;
+    }
+
+    .linktags {
         transition: all 0.4s ease;
-        &:hover{
+
+        &:hover {
             scale: 1.02;
 
         }
-        @include sm{
+
+        @include sm {
             display: none;
         }
     }
-    .left{
-        flex:3;
+
+    .left {
+        flex: 3;
         display: flex;
         align-items: center;
         gap: 50px;
-        .logo{
+
+        .logo {
             font-weight: bold;
             font-size: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
-            img{
+
+            img {
                 width: 28px;
                 height: 30px;
             }
-            span{
-                @include md{
+
+            span {
+                @include md {
                     display: none;
                 }
-                @include sm{
+
+                @include sm {
                     display: initial;
                 }
             }
         }
     }
-    .right{
-        flex:2;
+
+    .right {
+        flex: 2;
         display: flex;
         justify-content: flex-end;
         gap: 20px;
         align-items: center;
         background-color: #fcf5f3;
         height: 100%;
+
         @include sm {
             background-color: transparent;
         }
-        a{
+
+        .linktags {
             padding: 7px 16px;
             margin: 14px;
             border-radius: 4px;
         }
-        .register{
+
+        .register {
             background-color: #fece51;
+            
+            margin-right: 10px;
+            border-radius: 5px;
+
         }
-        .menuIcon{
+
+        .profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 300;
+
+
+            border-radius: 5px;
+            gap: 10px;
+            padding: 7px;
+
+            img {
+                width: 27px;
+                height: 27px;
+                border-radius: 50%;
+            }
+        }
+
+        .logout {
+            padding: 10px 15px;
+            background-color: #fece51;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .menuIcon {
             display: none;
-            @include sm{
+
+            @include sm {
                 display: inline;
             }
+
             cursor: pointer;
             z-index: 999;
             padding: 5px;
@@ -70,7 +119,8 @@ nav{
             background-color: black;
             border-radius: 5px;
         }
-        .menu{
+
+        .menu {
             position: absolute;
             background-color: black;
             color: white;
@@ -79,17 +129,21 @@ nav{
             width: 70%;
             height: 100vh;
             transition: all 1s ease;
-            &.active{
+
+            &.active {
                 right: 0;
             }
-            @include sm{
-                a{
+
+            @include sm {
+                .linktags {
                     display: initial;
 
                 }
-                .register{
+
+                .register {
                     background-color: black;
                 }
+
                 display: flex;
                 flex-direction: column;
                 align-items: center;

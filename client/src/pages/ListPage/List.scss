@@ -1,27 +1,44 @@
 @use "../../Responsive.scss" as *;
 
-.list{
+.list {
+    
+
     display: flex;
-    .product-container{
-        flex:3;
+    // full height only on desktop
+
+   
+
+    .product-container {
+        flex: 3;
         height: calc(100vh - 100px);
+
         
-        .wrapper{
+
+        .wrapper {
             padding-right: 50px;
             display: flex;
             height: 100%;
-            
+
             flex-direction: column;
             gap: 50px;
             overflow-y: scroll;
             padding-bottom: 20px;
+
             
+
         }
-        
+
     }
-    .map-container{
-        flex:2;
-        height: 100%;
-       
+
+    .map-container {
+        flex: 2;
+        height: calc(100vh - 100px);
+
+        @include md{
+            display: none;
+
+        }
+
+
     }
 }

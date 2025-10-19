@@ -1,6 +1,10 @@
+@use "../../Responsive.scss" as *;
 .card{
     display: flex;
     gap:20px;
+    @include sm{
+        flex-direction: column;
+    }
     .image-container{
         flex:2;
         img{
