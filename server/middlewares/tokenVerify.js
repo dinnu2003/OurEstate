@@ -10,7 +10,8 @@ export const tokenVerify=async(req,res,next)=>{
             return res.status(404).json({message:"Token is not valid"})
         }
         req.userId=payload.id
+        next()
     })
 
-    next()
+    
 }

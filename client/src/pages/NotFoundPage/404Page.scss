@@ -1,0 +1,437 @@
+@use "../../Responsive.scss" as *;
+// Variables
+$primary-color: #1a1a2e;
+$secondary-color: #16213e;
+$accent-color: #0f3460;
+$text-color: #e6e6e6;
+$highlight-color: #00b4d8;
+$star-color: #ffffff;
+
+// Mixins
+@mixin center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+// Keyframes
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+// Main Styles
+.not-found-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, $primary-color 0%, $secondary-color 50%, $accent-color 100%);
+  color: $text-color;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+  position: relative;
+  @include center-flex;
+
+  .stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+    .star {
+      position: absolute;
+      background-color: $star-color;
+      border-radius: 50%;
+      animation: twinkle 3s infinite ease-in-out;
+
+      @for $i from 1 through 50 {
+        &:nth-child(#{$i}) {
+          $size: random(3) + 1px;
+          width: $size;
+          height: $size;
+          top: random(100) + vh;
+          left: random(100) + vw;
+          animation-delay: random(3000) + ms;
+        }
+      }
+    }
+  }
+
+  .content {
+    @include center-flex;
+    flex-direction: column;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    padding: 2rem;
+
+    @include md {
+      flex-direction: row;
+      gap: 4rem;
+    }
+
+    @include sm {
+      padding: 1rem;
+      gap: 2rem;
+    }
+  }
+
+  // Astronaut Styles
+  .astronaut {
+    position: relative;
+    width: 150px;
+    height: 200px;
+    margin-bottom: 2rem;
+    animation: float 6s infinite ease-in-out;
+
+    @include md {
+      width: 200px;
+      height: 250px;
+      margin-bottom: 0;
+    }
+
+    @include sm {
+      width: 120px;
+      height: 160px;
+      margin-bottom: 1rem;
+    }
+
+    .helmet {
+      width: 120px;
+      height: 120px;
+      background: #f0f0f0;
+      border-radius: 50%;
+      position: relative;
+      margin: 0 auto;
+
+      @include sm {
+        width: 100px;
+        height: 100px;
+      }
+
+      .visor {
+        width: 80px;
+        height: 40px;
+        background: $highlight-color;
+        border-radius: 20px;
+        position: absolute;
+        top: 40px;
+        left: 20px;
+        box-shadow: 0 0 20px rgba($highlight-color, 0.5);
+
+        @include sm {
+          width: 60px;
+          height: 30px;
+          top: 35px;
+          left: 20px;
+        }
+      }
+    }
+
+    .body {
+      width: 100px;
+      height: 80px;
+      background: #f0f0f0;
+      border-radius: 40px 40px 0 0;
+      position: absolute;
+      top: 110px;
+      left: 25px;
+
+      @include sm {
+        width: 80px;
+        height: 60px;
+        top: 90px;
+        left: 20px;
+      }
+
+      .arm {
+        width: 20px;
+        height: 60px;
+        background: #f0f0f0;
+        border-radius: 10px;
+        position: absolute;
+        top: -10px;
+
+        @include sm {
+          width: 15px;
+          height: 50px;
+        }
+
+        &.left-arm {
+          left: -15px;
+          transform: rotate(30deg);
+
+          @include sm {
+            left: -12px;
+          }
+        }
+
+        &.right-arm {
+          right: -15px;
+          transform: rotate(-30deg);
+
+          @include sm {
+            right: -12px;
+          }
+        }
+      }
+    }
+  }
+
+  // Message Styles
+  .message {
+    max-width: 500px;
+
+    @include sm {
+      max-width: 100%;
+    }
+
+    .error-code {
+      font-size: 6rem;
+      font-weight: bold;
+      margin: 0;
+      background: linear-gradient(45deg, $highlight-color, #90e0ef);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba($highlight-color, 0.3);
+
+      @include md {
+        font-size: 8rem;
+      }
+
+      @include lg {
+        font-size: 10rem;
+      }
+
+      @include sm {
+        font-size: 5rem;
+      }
+    }
+
+    .error-title {
+      font-size: 1.8rem;
+      margin: 1rem 0;
+      color: $text-color;
+
+      @include md {
+        font-size: 2.2rem;
+      }
+
+      @include lg {
+        font-size: 2.5rem;
+      }
+
+      @include sm {
+        font-size: 1.5rem;
+        margin: 0.5rem 0;
+      }
+    }
+
+    .error-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 1.5rem 0 2.5rem;
+      opacity: 0.9;
+
+      @include md {
+        font-size: 1.1rem;
+      }
+
+      @include sm {
+        font-size: 0.9rem;
+        margin: 1rem 0 2rem;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  // Home Button Styles
+  .home-button {
+    background: linear-gradient(45deg, $highlight-color, #0077b6);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 5px 15px rgba($highlight-color, 0.3);
+    animation: pulse 2s infinite ease-in-out;
+
+    @include md {
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+    }
+
+    @include sm {
+      padding: 0.7rem 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba($highlight-color, 0.5);
+      background: linear-gradient(45deg, #0077b6, $highlight-color);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+
+    .button-text {
+      margin-right: 0.5rem;
+    }
+
+    .button-icon {
+      font-size: 1.1rem;
+
+      @include md {
+        font-size: 1.2rem;
+      }
+
+      @include sm {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  // Planet Styles
+  .planet {
+    position: absolute;
+    bottom: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle at 30% 30%, #4cc9f0, #4361ee);
+    border-radius: 50%;
+    box-shadow: 0 0 50px rgba(76, 201, 240, 0.3);
+    animation: rotate 60s infinite linear;
+
+    @include md {
+      width: 250px;
+      height: 250px;
+      bottom: -80px;
+      right: -80px;
+    }
+
+    @include sm {
+      width: 150px;
+      height: 150px;
+      bottom: -50px;
+      right: -50px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 20%;
+      left: 15%;
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+
+      @include md {
+        width: 50px;
+        height: 50px;
+      }
+
+      @include sm {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 30%;
+      right: 25%;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+
+      @include md {
+        width: 35px;
+        height: 35px;
+      }
+
+      @include sm {
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+}
+
+// Additional responsive adjustments
+@include sm {
+  .not-found-container {
+    .content {
+      flex-direction: column;
+    }
+    
+    .astronaut {
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+// Large screen optimizations
+@include lg {
+  .not-found-container {
+    .content {
+      gap: 3rem;
+    }
+    
+    .message {
+      max-width: 450px;
+    }
+  }
+}

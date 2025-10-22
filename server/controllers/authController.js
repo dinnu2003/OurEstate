@@ -16,7 +16,7 @@ export const Register = async (req, res) => {
         })
         console.log(newUser)
         if (!newUser) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: "An error Occured"
             })
         }
@@ -26,9 +26,9 @@ export const Register = async (req, res) => {
             data: newUser
         })
     }
-    catch(err){
+    catch (err) {
         res.status(500).json({
-            message:"Registration Failed!"
+            message: "Registration Failed!"
         })
     }
 
@@ -38,34 +38,51 @@ export const Register = async (req, res) => {
 export const Login = async (req, res) => {
     const { username, password } = req.body;
     try {
-        const user=await prisma.user.findUnique({
-            where:{
+        const user = await prisma.user.findUnique({
+            where: {
                 username
             }
         })
-        console.log(user)
-        if(!user){
-            res.status(401).json({
-                message:"user not found"
+
+        if (!user) {
+            return res.status(401).json({
+                message: "user not found"
             })
         }
-        const isPassValid=await bcrypt.compare(password,user.password)
-        if(!isPassValid){
-            res.status(400).json({message:"Invalid credentials"})
+        const isPassValid = await bcrypt.compare(password, user.password)
+        if (!isPassValid) {
+            return res.status(400).json({ message: "Invalid credentials" })
         }
-        const age=1000*60*60*24*7;
+        const age = 1000 * 60 * 60 * 24 * 7;
+        const { password: _, ...userInfo } = user;
 
-        const token=jwt.sign({
-            id:user.id
-        },process.env.JWT_SECRET_KEY,{expiresIn:age})
-        res.cookie("token",token,{
-            httpOnly:true
-        }).status(200).json({message:"Login Succesfull"})
+        const token = jwt.sign({
+            id: user.id
+        }, process.env.JWT_SECRET_KEY, { expiresIn: age })
+        res.cookie("token", token, {
+            httpOnly: true
+        }).status(200).json(userInfo)
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Login failed" })
+    }
+
+
+}
+
+export const Logout = async (req,res) => {
+    try {
+        // Clear the cookie named "token"
+        return res.clearCookie("token", {
+            httpOnly: true
+            
+        }).status(200).json({ message: "Logged out successfully" });
+
         
     } catch (err) {
         console.log(err);
-        res.status(500).json({message:"Login failed"})
+        res.status(500).json({ message: "Logout failed" });
     }
-
 
 }

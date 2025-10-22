@@ -1,0 +1,374 @@
+@use "../../Responsive.scss" as *;
+
+
+
+.profiler {
+    display: flex;
+    height: calc(100vh - 100px); // 100px for navbar
+
+    position: relative;
+    overflow: hidden;
+
+    @include md {
+        flex-direction: column;
+        height: auto;
+        min-height: calc(100vh - 100px);
+    }
+
+    // Left Side - Profile Content
+    .profile-content {
+        flex: 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding:0;
+        z-index: 2;
+
+       
+    
+    }
+
+    .container {
+        max-width: 500px;
+        width: 100%;
+        background: #ffffff;
+        border-radius: 1rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        padding: 2.5rem;
+
+        @include md {
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        @include sm {
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+        }
+    }
+
+    .profile-picture-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+
+        @include sm {
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-picture-container {
+            position: relative;
+
+            .profile-picture {
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+                border: 4px solid #ffffff;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                object-fit: cover;
+
+                @include sm {
+                    width: 100px;
+                    height: 100px;
+                    border: 3px solid #ffffff;
+                }
+            }
+
+            .edit-picture-btn {
+                position: absolute;
+                bottom: 5px;
+                right: 5px;
+                background: #5b4cfd;
+                color: white;
+                padding: 0.5rem;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: background 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 2px 8px rgba(91, 76, 253, 0.3);
+
+                &:hover {
+                    background: #4a3dd9;
+                }
+
+                @include sm {
+                    padding: 0.4rem;
+                    bottom: 2px;
+                    right: 2px;
+                }
+
+                .file-input {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        gap: 0.75rem;
+
+        @include sm {
+            margin-bottom: 1.5rem;
+            flex-direction: column;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 0.75rem;
+
+            @include sm {
+                flex-direction: row;
+                width: 100%;
+            }
+        }
+    }
+
+    .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        border-radius: 0.5rem;
+        border: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        @include sm {
+            padding: 0.75rem 1rem;
+            flex: 1;
+        }
+
+        &.btn-edit {
+            background: #5b4cfd;
+            color: white;
+
+            &:hover {
+                background: #4a3dd9;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(91, 76, 253, 0.3);
+            }
+        }
+
+        &.btn-cancel {
+            background: #6b7280;
+            color: white;
+
+            &:hover {
+                background: #4b5563;
+            }
+        }
+
+        &.btn-save {
+            background: #10b981;
+            color: white;
+
+            &:hover {
+                background: #059669;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            }
+        }
+
+        &.btn-secondary {
+            flex: 1;
+            background: transparent;
+            color: #374151;
+            border: 1px solid #d1d5db;
+
+            &:hover {
+                background: #f9fafb;
+            }
+        }
+
+        &.btn-primary {
+            flex: 1;
+            background: #5b4cfd;
+            color: white;
+
+            &:hover {
+                background: #4a3dd9;
+            }
+        }
+    }
+
+    .profile-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        @include sm {
+            gap: 1.25rem;
+        }
+
+        .field {
+            .field-label {
+                display: block;
+                font-size: 0.875rem;
+                font-weight: 600;
+                color: #374151;
+                margin-bottom: 0.5rem;
+
+                @include sm {
+                    font-size: 0.8125rem;
+                }
+            }
+
+            .field-input {
+                width: 100%;
+                padding: 0.75rem 1rem;
+                border: 1px solid #e5e7eb;
+                border-radius: 0.5rem;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                box-sizing: border-box;
+
+                @include sm {
+                    padding: 0.75rem 0.875rem;
+                    font-size: 0.9375rem;
+                }
+
+                &:focus {
+                    outline: none;
+                    border-color: #5b4cfd;
+                    box-shadow: 0 0 0 3px rgba(91, 76, 253, 0.1);
+                }
+            }
+
+            .field-value {
+                font-size: 1rem;
+                color: #111827;
+                margin: 0;
+
+                @include sm {
+                    font-size: 0.9375rem;
+                }
+            }
+        }
+    }
+
+    // Right Side - Background Images
+    .image-container{
+        flex: 2;
+        position: relative;
+        @include md{
+            display: none;
+        }
+        background-color: #fcf5f3;
+        img{
+            position: absolute;
+            right: 0;
+            width: 115%;
+        }
+    }
+
+    // Modal Styles
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        z-index: 100;
+        backdrop-filter: blur(4px);
+
+        .modal {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            max-width: 448px;
+            width: 100%;
+            padding: 1.75rem;
+
+            @include sm {
+                max-width: 95%;
+                padding: 1.5rem;
+                border-radius: 0.75rem;
+            }
+
+            .modal-header {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                margin-bottom: 1rem;
+
+                @include sm {
+                    gap: 0.5rem;
+                }
+
+                .modal-icon {
+                    background: #dbeafe;
+                    padding: 0.75rem;
+                    border-radius: 50%;
+                    color: #2563eb;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    @include sm {
+                        padding: 0.625rem;
+                    }
+                }
+
+                .modal-title {
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                    color: #111827;
+                    margin: 0;
+
+                    @include sm {
+                        font-size: 1.125rem;
+                    }
+                }
+            }
+
+            .modal-text {
+                color: #4b5563;
+                margin-bottom: 1.25rem;
+                font-size: 0.9375rem;
+                line-height: 1.5;
+
+                @include sm {
+                    font-size: 0.875rem;
+                }
+            }
+
+            .modal-field {
+                margin-bottom: 1.25rem;
+
+                .error-message {
+                    color: #dc2626;
+                    font-size: 0.875rem;
+                    margin-top: 0.5rem;
+
+                    @include sm {
+                        font-size: 0.8125rem;
+                    }
+                }
+                .field-input{
+                    padding: 5px;
+                    margin-left: 5px;
+                }
+            }
+
+            .modal-actions {
+                display: flex;
+                gap: 0.75rem;
+
+                @include sm {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                }
+            }
+        }
+    }
+}
